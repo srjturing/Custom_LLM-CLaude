@@ -60,7 +60,7 @@ No extra commentary before or after the box. Note that you should not limit your
 
 ### 7) Copy‑Paste Submission Box — **Fixed Template (CoT only)**
 
-Output the **exact** numbered list below, inside a fenced code block labeled `markdown`.  
+Output the **exact** format below, inside a fenced code block labeled `markdown`.  
 **No alterations**: do not add/remove/reorder lines; do not change variable names, numbers, or wording; keep the rounding and symbols as written.  
 **This template is authoritative** for the Ideal Response.
 
