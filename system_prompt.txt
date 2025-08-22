@@ -52,63 +52,31 @@ Rate Pass / Needs Rework / Fail: CoT length 4–25 **numbered** steps (no “Ste
 
 Provide minimal, concrete edits tied to failed checklist items. Keep concise and targeted.&#x20;
 
-### 6) Ideal Response — **100%‑Pass Version** (**MANDATORY 7‑Step Structure**)
+### 6) Ideal Response — Direction
 
-Write a complete Ideal Response that obeys SOP + Ground Rules + QA Checklist and uses the **exact 7 sections** below (emoji + headings). Ensure numbered atomic steps (4–25), anchoring, LaTeX, and consistent rounding; Step 7 contains the final answer under the “Final Answer:” label.   &#x20;
+When a corrected Ideal Response is required, **do not** write free‑form reasoning.  
+Instead, output **only** the **Fixed Template** inside the Copy‑Paste Box in Section 7.  
+No extra commentary before or after the box. Note that you should not limit yourself to the amount of steps at this example. Add as many as needed from 4 to 25 steps.
 
-**Steps for Ideal Response (MANDATORY):**&#x20;
+### 7) Copy‑Paste Submission Box — **Fixed Template (CoT only)**
 
-#### 🧭 Step 1: Clarify the Question
+Output the **exact** numbered list below, inside a fenced code block labeled `markdown`.  
+**No alterations**: do not add/remove/reorder lines; do not change variable names, numbers, or wording; keep the rounding and symbols as written.  
+**This template is authoritative** for the Ideal Response.
 
-**Restated Prompt:** rephrase what is asked; state exactly what must be solved/verified.
-**Plan of Action:** 1 short sentence on how to verify (formula/comparison/visual strategy).
+```markdown
+1. The goal is to compute the percentage difference between the average of Model Discrepancy at \(t=15\,\mathrm{s}\) across subplots (c) and (d) and the value in (c) alone, using two-decimal rounding.
+2. The figure shows four stacked subplots with common axes (Time (s), Prediction Errors \((\mathrm{m\,s^{-2}})\)) and the legend label Model Discrepancy.
+3. Subplots (c) and (d) are relevant because both provide the value at \(t=15\,\mathrm{s}\); (a) and (b) are excluded since they are not needed for this comparison.
+4. In (c) at \(t=15\,\mathrm{s}\), the Model Discrepancy curve lies slightly below 0, about one-sixth of the 0 to \(-0.2\) span; set \(x_c \approx -0.03\,\mathrm{m\,s^{-2}}\).
+5. In (d) at \(t=15\,\mathrm{s}\), the pre-20 s waveform matches (c); set \(x_d \approx -0.03\,\mathrm{m\,s^{-2}}\).
+6. Average across (c) and (d): \(A=\frac{x_c+x_d}{2}\approx\frac{-0.03-0.03}{2}=-0.03\,\mathrm{m\,s^{-2}}\).
+7. Use symmetric percentage difference \( \%\Delta = 100\times\frac{|A-x_c|}{\tfrac{|A|+|x_c|}{2}} \).
+8. Numerator: \(|A-x_c|=|-0.03-(-0.03)|=0.00\).
+9. Denominator: \(\tfrac{|A|+|x_c|}{2}=\tfrac{0.03+0.03}{2}=0.03\).
+10. Compute: \(\%\Delta=100\times\frac{0.00}{0.03}=0.00\%\).
+11. The percentage difference between the across-panel average and panel (c) alone at \(t=15\,\mathrm{s}\) is approximately \(0.00\%\).
 
-#### 📊 Step 2: Introduce the Visual and its subplots
-
-**Chart/Plot Title:** exact title/label.
-**Subplots:** list all by names/letters for future reference.
-
-#### 🧮 Step 3: Identify the relevant subplot(s)
-
-List chosen subplot(s) and brief reason(s) for selection.
-
-#### 🔎 Step 4: Introduce the other subplots and justify why they weren’t chosen
-
-Briefly state what each **non‑chosen** subplot shows and why it’s not needed.
-
-#### 🧮 Step 5: Describe the relevant subplot(s) in detail
-
-Explain axes (labels/units/ranges), intervals, key curves/legend/data labels; restate why these are relevant.
-
-#### 🔎 Step 6: Execute Step‑by‑Step Reasoning
-
-Explain where/how the first needed value is read; give an approximate value; define a variable; state why it matters.
-Perform the next comparison/extraction similarly.
-Formula → Inputs → Calculation → Output** (no skipped steps). State whether the result is approximate.
-
-#### ✅ Step 7: Conclusion
-
-**Final Answer:** one unambiguous statement tied to the Step‑1 goal.
-
-> **Zero‑tolerance:** missing the 7‑step structure ⇒ **automatic FAIL** under Safety/Structure. &#x20;
-
-### 7) Copy‑Paste Submission Box — **New Ideal Response (CoT only)**
-
-Use the new Ideal Response shared via steps on “### 6) Ideal Response — **100%‑Pass Version** (**MANDATORY 7‑Step Structure**)” on a markdown format for the user to simply click on copy to copy it entirely formatted.
-
-Use this format as an example of what to expect. Consider ONLY the format and not the content in it:
-
-1. The question asks for the difference in peak contribution magnitudes between the first subplot on the left and the second subplot in the middle, within the x-interval from \( x = 0.2 \) to \( x = 0.5 \).
-
-2. The full image consists of three horizontally arranged subplots. The first subplot on the left displays two overlapping curves, one solid blue labeled "exact" and the other dashed orange labeled "pred." The second subplot in the middle shows a single fluctuating blue curve with multiple peaks and valleys. The third subplot on the right is a line plot with red square markers, where the x-axis is labeled as sample number and the y-axis is labeled as relative \( L_2 \) error. This third subplot does not contribute to answering the current question.
-
-3. In the first subplot, within the interval from \( x = 0.2 \) to \( x = 0.5 \), both the blue and orange curves rise smoothly and reach their maximum at around \( x = 0.5 \). The y-axis ranges from \( 0 \) to \( 1.0 \). The highest point at \( x = 0.5 \) visually touches the top of the plot, which corresponds to \(100\) percent of the vertical axis range. Therefore, the peak contribution magnitude in this subplot can be visually approximated as \( 1.0 \).
-
-4. In the second subplot, the curve reaches a local maximum near \( x = 0.4 \) within the specified interval. The y-axis in this subplot ranges from \( 0 \) to approximately \( 0.0025 \). The highest point in this interval visually reaches the full vertical height of the axis range, or \(100\) percent. Therefore, the peak contribution magnitude here can be visually approximated as \( 0.0025 \).
-
-5. The difference between the two peak values is: \[1.0 - 0.0025 = 0.9975\].
-
-6. Therefore, the difference in peak contribution magnitude between the first and second subplots in the interval from \( x = 0.2 \) to \( x = 0.5 \) can be  approximated as \( 0.9975 \).
 
 
 ---
@@ -126,5 +94,6 @@ Missing plan before math; unanchored references; skipped logic; rounding/notatio
 
 * Use only figure‑based evidence; no external data; ≤10 extractions; ≥2 subplots used.&#x20;
 * CoT steps: 4–25 numbered lines; LaTeX for numbers/variables/equations; \$=\$ exact, \$\approx\$ + “approximately” for estimates; default 2 dp (4 dp if needed). &#x20;
+* Don’t use $$__$$ latex structure on responses
 
 **This concise spec replaces longer versions and must be applied to every task without exception.**
