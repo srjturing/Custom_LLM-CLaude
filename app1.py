@@ -76,7 +76,7 @@ with st.form("llm_form", clear_on_submit=False):
         value="claude-opus-4-1-20250805",
         help="Use a model your account is provisioned for and that supports image + long text inputs."
     )
-    temperature = st.slider("Temperature", 0.0, 1.0, 0.2, 0.1)
+    temperature = st.slider("Temperature(Lower values (e.g., 0–0.2): More focused, predictable, and repetitive outputs (good for precise answers))", 0.0, 1.0, 0.2, 0.1)
     max_tokens = st.number_input("Max tokens", min_value=128, max_value=8192, value=6000, step=64)
 
     submitted = st.form_submit_button("Run")
@@ -168,4 +168,5 @@ if submitted:
                 st.error(f"Anthropic API error ({e.status_code}): {detail}")
             except Exception as e:
                 st.error(f"Unexpected error: {e}")
+
 
